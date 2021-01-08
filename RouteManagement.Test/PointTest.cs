@@ -4,29 +4,19 @@ namespace RouteManagement.Test
 {
     public class PointTest
     {
-        [Test]
-        public void TestDistance()
+        [Test, Sequential]
+        public void TestDistance(
+            [Values(0, 1, 0)] double x,
+            [Values(0, 0, 1)] double y,
+            [Values(0, 1, 1)] double expectedDistance
+            )
         {
             Point referencePoint = new Point(0, 0);
-            double expectedDistanceToSelf = 0.0;
+            Point otherPoint = new Point(x, y);
             Assert.AreEqual(
-                expectedDistanceToSelf,
-                referencePoint.GetDistance(referencePoint),
+                expectedDistance,
+                referencePoint.GetDistance(otherPoint),
                 1e-4);
-            Point horizontalPoint = new Point(1, 0);
-            Point verticalPoint = new Point(0, 1);
-            double expectedHorizontalDistance = 1.0;
-            double expectedVerticalDistance = 1.0;
-            Assert.AreEqual(
-                expectedHorizontalDistance,
-                referencePoint.GetDistance(horizontalPoint),
-                1e-4);
-            Assert.AreEqual(
-                expectedVerticalDistance,
-                referencePoint.GetDistance(verticalPoint),
-                1e-4);
-
-
         }
     }
 }
